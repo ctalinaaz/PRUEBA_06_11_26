@@ -324,7 +324,7 @@
 
             <h4>Chile en América</h4>
 
-            <p>El continente americano reúne 322 de las 1.504 instituciones consideradas en el ranking. Su distribución por país es la siguiente:</p>
+            <p>El continente americano reúne 332 de las 1.504 instituciones consideradas en el ranking. Su distribución por país es la siguiente:</p>
 
             <canvas id="identidad"></canvas>
 
@@ -577,55 +577,46 @@
             }
         </script>
 
-        <!-- Lo necesario para el gráfico en el canvas -->
+               <!-- Lo necesario para el gráfico en el canvas -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
+            const paisesAmericanos = [
+                "Estados Unidos",
+                "Canadá",
+                "Brasil",
+                "México",
+                "Chile",
+                "Argentina",
+                "Colombia",
+                "Perú",
+                "Ecuador",
+                "Uruguay",
+                "Venezuela",
+                "Costa Rica",
+                "Cuba",
+                "Guatemala",
+                "República Dominicana",
+                "Puerto Rico",
+                "Paraguay",
+                "Honduras",
+                "Panamá",
+            ];
+
+            const institucionesPorPais = [184, 30, 22, 18, 17, 16, 12, 6, 6, 4, 4, 3, 2, 2, 2, 1, 1, 1, 1];
+
+            // Chile se destaca con un tono más oscuro; el resto en gris claro
+            const colores = paisesAmericanos.map((pais) => (pais === "Chile" ? "rgb(60, 60, 60)" : "rgb(214, 214, 214)"));
+
             new Chart(document.getElementById("identidad"), {
                 type: "bar",
                 data: {
-                    labels: [
-                        "Argentina",
-                        "Australia",
-                        "Austria",
-                        "Belgium",
-                        "Brazil",
-                        "Canada",
-                        "Chile",
-                        "China (Mainland)",
-                        "Colombia",
-                        "Czech Republic",
-                        "Denmark",
-                        "Estonia",
-                        "Finland",
-                        "France",
-                        "Germany",
-                        "Hong Kong",
-                        "India",
-                        "Ireland",
-                        "Italy",
-                        "Japan",
-                        "Malaysia",
-                        "Mexico",
-                        "Netherlands",
-                        "Saudi Arabia",
-                        "Singapore",
-                        "South Korea",
-                        "Sweden",
-                        "Switzerland",
-                        "Taiwan",
-                        "Thailand",
-                        "United Kingdom",
-                        "United States",
-                        "Vietnam",
-                    ],
+                    labels: paisesAmericanos,
                     datasets: [
                         {
-                            label: "Veces en el top 100",
-                            data: [
-                                2, 5, 2, 1, 1, 2, 1, 6, 1, 1, 1, 1, 1, 3, 2, 2, 1, 1, 6, 2, 2, 2, 4, 1, 3, 3, 3, 2, 1,
-                                1, 11, 24, 1,
-                            ],
-                            backgroundColor: "rgb(214, 214, 214)",
+                            label: "Instituciones en el ranking",
+                            data: institucionesPorPais,
+                            backgroundColor: colores,
+                            borderColor: "rgb(150, 150, 150)",
                             borderWidth: 1,
                         },
                     ],
@@ -635,6 +626,17 @@
                     responsive: true,
                     maintainAspectRatio: true,
                     aspectRatio: 1,
+                    plugins: {
+                        legend: { display: false },
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: "Instituciones evaluadas por QS (total América: 332)",
+                            },
+                        },
+                    },
                 },
             });
         </script>
